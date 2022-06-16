@@ -48,13 +48,13 @@ class ScoreCam():
     """
         Produces class activation map
     """
-    def __init__(self, model, target_layer, size=256):
+    def __init__(self, model, target_layer):
         self.model = model
         self.model.eval()
         # Define extractor
         self.extractor = CamExtractor(self.model, target_layer)
 
-    def generate_cam(self, input_image, target_class=None):
+    def generate_cam(self, input_image, target_class=None, size=256):
         # Full forward pass
         # conv_output is the output of convolutions at specified layer
         # model_output is the final output of the model (1, 1000)
