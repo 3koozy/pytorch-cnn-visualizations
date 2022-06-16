@@ -10,7 +10,7 @@ import torch
 from torch.optim import Adam
 from torchvision import models
 
-from misc_functions import preprocess_image, recreate_image, save_image
+from pytorch_cnn_visualizations.src.misc_functions import preprocess_image, recreate_image, save_image
 
 
 class CNNLayerVisualization():
