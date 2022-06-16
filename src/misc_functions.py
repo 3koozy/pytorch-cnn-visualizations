@@ -158,7 +158,7 @@ def save_image(im, path):
     im.save(path)
 
 
-def preprocess_image(pil_im, resize_im=True):
+def preprocess_image(pil_im, resize_im=True, resize_dim=256):
     """
         Processes image for CNNs
 
@@ -181,7 +181,7 @@ def preprocess_image(pil_im, resize_im=True):
 
     # Resize image
     if resize_im:
-        pil_im = pil_im.resize((224, 224), Image.ANTIALIAS)
+        pil_im = pil_im.resize((resize_dim, resize_dim), Image.ANTIALIAS)
 
     im_as_arr = np.float32(pil_im)
     im_as_arr = im_as_arr.transpose(2, 0, 1)  # Convert array to D,W,H
