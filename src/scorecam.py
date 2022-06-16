@@ -48,7 +48,7 @@ class ScoreCam():
     """
         Produces class activation map
     """
-    def __init__(self, model, target_layer):
+    def __init__(self, model, target_layer, size=256):
         self.model = model
         self.model.eval()
         # Define extractor
@@ -70,7 +70,7 @@ class ScoreCam():
             # Unsqueeze to 4D
             saliency_map = torch.unsqueeze(torch.unsqueeze(target[i, :, :],0),0)
             # Upsampling to input size
-            saliency_map = F.interpolate(saliency_map, size=(224, 224), mode='bilinear', align_corners=False)
+            saliency_map = F.interpolate(saliency_map, size=(size, size), mode='bilinear', align_corners=False)
             if saliency_map.max() == saliency_map.min():
                 continue
             # Scale between 0-1
