@@ -18,12 +18,13 @@ class CNNLayerVisualization():
         Produces an image that minimizes the loss of a convolution
         operation for a specific layer and filter
     """
-    def __init__(self, model, selected_layer, selected_filter):
+    def __init__(self, model, selected_layer, selected_filter, dir_path):
         self.model = model
         self.model.eval()
         self.selected_layer = selected_layer
         self.selected_filter = selected_filter
         self.conv_output = 0
+        self.dir_path = dir_path
         # Create the folder to export images if not exists
         if not os.path.exists('../generated'):
             os.makedirs('../generated')
@@ -35,7 +36,7 @@ class CNNLayerVisualization():
         # Hook the selected layer
         self.model[self.selected_layer].register_forward_hook(hook_function)
 
-    def visualise_layer_with_hooks(self, dir_path):
+    def visualise_layer_with_hooks(self):
         # Hook the selected layer
         self.hook_layer()
         # Generate a random image
@@ -68,8 +69,9 @@ class CNNLayerVisualization():
             # Recreate image
             self.created_image = recreate_image(processed_image)
             # Save image
+            os.makedirs(self.dir_path, exist_ok=True)
             if i % 5 == 0:
-                im_path = dir_path + 'layer_vis_l' + str(self.selected_layer) + \
+                im_path = self.dir_path + 'layer_vis_l' + str(self.selected_layer) + \
                     '_f' + str(self.selected_filter) + '_iter' + str(i) + '.jpg'
                 save_image(self.created_image, im_path)
 
@@ -109,8 +111,9 @@ class CNNLayerVisualization():
             # Recreate image
             self.created_image = recreate_image(processed_image)
             # Save image
+            os.makedirs(self.dir_path, exist_ok=True)
             if i % 5 == 0:
-                im_path = '../generated/layer_vis_l' + str(self.selected_layer) + \
+                im_path = self.dir_path + 'layer_vis_l' + str(self.selected_layer) + \
                     '_f' + str(self.selected_filter) + '_iter' + str(i) + '.jpg'
                 save_image(self.created_image, im_path)
 
