@@ -39,7 +39,7 @@ class CamExtractor():
         #avgpooling:
         for name, module in self.model.named_modules():
             if 'avgpool' in name:
-            x = module(x)
+                x = module(x)
         x = x.view(x.size(0), -1)  # Flatten
         # Forward pass on the classifier
         x = self.model.classifier(x)
