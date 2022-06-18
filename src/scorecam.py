@@ -36,13 +36,13 @@ class CamExtractor():
         """
         # Forward pass on the convolutions
         conv_output, x = self.forward_pass_on_convolutions(x)
-        #avgpooling:
-        for name, module in self.model.named_modules():
-            if 'avgpool' in name:
-                x = module(x)
-        x = x.view(x.size(0), -1)  # Flatten
+#         #avgpooling:
+#         for name, module in self.model.named_modules():
+#             if 'avgpool' in name:
+#                 x = module(x)
+#         x = x.view(x.size(0), -1)  # Flatten
         # Forward pass on the classifier
-        x = self.model.classifier(x)
+        x = self.model.classifier(x) #assume classifier include all layers other tan features (avgpool,flatten,...)
         return conv_output, x
 
 
