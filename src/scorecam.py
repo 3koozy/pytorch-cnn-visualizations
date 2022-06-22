@@ -64,7 +64,7 @@ class ScoreCam():
         if target_class is None:
             target_class = np.argmax(model_output.data.numpy())
         # Get convolution outputs
-        target = conv_output #[0]
+        target = conv_output[0]
         # Create empty numpy array for cam
         cam = np.ones(target.shape[1:], dtype=np.float32)
         # Multiply each weight with its conv output and then, sum
